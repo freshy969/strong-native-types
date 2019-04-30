@@ -1,0 +1,42 @@
+{
+    "name": "alphametric/strong-native-types",
+    "description": "A package to provide a set of strongly-typed class wrappers for PHP's native data types.",
+	"keywords": [
+        "alphametric",
+        "php",
+        "types",
+        "strong"
+    ],
+    "type": "library",
+    "license": "MIT",
+	"homepage": "https://github.com/alphametric/strong-native-types",
+    "authors": [
+        {
+            "name": "Alphametric",
+            "email": "noreply@alphametric.co"
+        }
+    ],
+	"autoload": {
+        "files": [
+            "src/Support/Helpers.php"
+        ],
+		"psr-4": {
+			"Alphametric\\Strong\\": "src"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Alphametric\\Strong\\Tests\\": "tests"
+		}
+	},
+    "require": {
+		"php": "^7.2"
+	},
+    "require-dev": {
+        "phpunit/phpunit": "^8.0"
+    },
+	"scripts": {
+		"test": "vendor/bin/phpunit"
+	},
+    "minimum-stability": "stable"
+}
