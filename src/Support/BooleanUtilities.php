@@ -27,6 +27,9 @@ trait BooleanUtilities
 	 **/
 	public function false()
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Defer to the main method
 		return $this -> set(false);
 	}
@@ -72,6 +75,9 @@ trait BooleanUtilities
 	 **/
 	public function true()
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Defer to the main method
 		return $this -> set(true);
 	}

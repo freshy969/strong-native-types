@@ -27,6 +27,9 @@ trait IntegerUtilities
 	 **/
 	public function add($object)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Validate the data
 		$object = $this -> validate($object);
 
@@ -73,6 +76,9 @@ trait IntegerUtilities
 	 **/
 	public function divideBy($object)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Validate the data
 		$object = $this -> validate($object);
 
@@ -191,6 +197,9 @@ trait IntegerUtilities
 	 **/
 	public function multiplyBy($object)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Validate the data
 		$object = $this -> validate($object);
 
@@ -219,6 +228,9 @@ trait IntegerUtilities
 	 **/
 	public function random(int $minimum = 0, int $maximum = 10)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Set the value
 		$this -> container = random_int($minimum, $maximum);
 
@@ -237,6 +249,9 @@ trait IntegerUtilities
 	 **/
 	public function remainderFrom($object)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Validate the data
 		$object = $this -> validate($object);
 
@@ -258,6 +273,9 @@ trait IntegerUtilities
 	 **/
 	public function subtract($object)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Validate the data
 		$object = $this -> validate($object);
 

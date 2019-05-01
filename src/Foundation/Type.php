@@ -8,6 +8,7 @@ use ReflectionClass;
 use Alphametric\Strong\Foundation\Macro;
 
 // Exceptions
+use Alphametric\Strong\Exceptions\ImmutableTypeException;
 use Alphametric\Strong\Exceptions\ObjectConversionException;
 use Alphametric\Strong\Exceptions\InvalidAssignmentException;
 
@@ -28,6 +29,14 @@ abstract class Type
 	 *
 	 **/
 	protected $container;
+
+
+
+	/**
+	 * Flag for whether the type can be changed.
+	 *
+	 **/
+	protected $mutable = true;
 
 
 
@@ -70,6 +79,53 @@ abstract class Type
 	{
 		// Retrieve the name of the class and return it
 		return (new ReflectionClass(static::class)) -> getShortName();
+	}
+
+
+
+	/**
+	 * Check if the type is immutable and throw an exception if so.
+	 *
+	 * @param none.
+	 * @return void.
+	 *
+	 **/
+	public function bailWhenImmutable()
+	{
+		// Ensure the type is not mutable
+		if ($this -> isImmutable()) {
+			ImmutableTypeException::throw();
+		}
+	}
+
+
+
+	/**
+	 * Determine if the type is immutable.
+	 *
+	 * @param none.
+	 * @return bool.
+	 *
+	 **/
+	public function isImmutable()
+	{
+		// Return the flag status
+		return $this -> mutable === false;
+	}
+
+
+
+	/**
+	 * Determine if the type is mutable.
+	 *
+	 * @param none.
+	 * @return bool.
+	 *
+	 **/
+	public function isMutable()
+	{
+		// Return the flag status
+		return $this -> mutable === true;
 	}
 
 
@@ -189,6 +245,42 @@ abstract class Type
 	{
 		// Execute the conversion and return the result
 		return is_null($this -> container) ? $default : intval($this -> container);
+	}
+
+
+
+	/**
+	 * Convert the type to a immutable variety.
+	 *
+	 * @param none.
+	 * @return $this.
+	 *
+	 **/
+	public function toImmutable()
+	{
+		// Update the flag
+		$this -> mutable = false;
+
+		// Allow method chaining
+		return $this;
+	}
+
+
+
+	/**
+	 * Convert the type to a mutable variety.
+	 *
+	 * @param none.
+	 * @return $this.
+	 *
+	 **/
+	public function toMutable()
+	{
+		// Update the flag
+		$this -> mutable = true;
+
+		// Allow method chaining
+		return $this;
 	}
 
 

@@ -110,6 +110,30 @@ NullableStringType::from('hello')->toNonNullable(); // StringType
 NullableStringType::from(null)->toNonNullable();    // Throws exception
 ```
 
+## Immutability
+
+By default, all created types are `mutable`. However, you can also set them to be `immutable`. Once set, any attempt to modify the underlying data within the type will result in an exception:
+
+```php
+StringType::from('hello')->toImmutable()->append('world'); // Throws exception
+```
+
+You can switch the type back to a `mutable` state if required:
+
+```php
+$string = StringType::from('hello')->toImmutable();
+$string->toMutable()->append('world'); // helloworld
+```
+
+You can also check the mutability status of a type using the helper methods:
+
+```php
+StringType::from('hello')->toImmutable()->isImmutable(); // true
+StringType::from('hello')->toImmutable()->isMutable();   // false
+```
+
+> NOTE: While `immutable` types cannot be manipulated using utility methods (see below), you can still convert them to other types using the conversion methods e.g. `toBoolean()`.
+
 ## Extraction
 
 At some point, you will likely want to retrieve the underlying value within the object. You can do this using the `value` method:

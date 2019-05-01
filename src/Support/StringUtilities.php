@@ -27,6 +27,9 @@ trait StringUtilities
 	 **/
 	public function after($object)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Validate the data
 		$object = $this -> validate($object);
 
@@ -50,6 +53,9 @@ trait StringUtilities
 	 **/
 	public function append($object)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Validate the data
 		$object = $this -> validate($object);
 
@@ -71,6 +77,9 @@ trait StringUtilities
 	 **/
 	public function before($object)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Validate the data
 		$object = $this -> validate($object);
 
@@ -122,6 +131,9 @@ trait StringUtilities
 	 **/
 	public function camelCase()
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Update the value
 		$this -> container = lcfirst($this -> studCase() -> value());
 
@@ -140,6 +152,9 @@ trait StringUtilities
 	 **/
 	public function capitalize()
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Update the value
 		$this -> container = ucwords($this -> container);
 
@@ -158,6 +173,9 @@ trait StringUtilities
 	 **/
 	public function capitalizeFirstLetter()
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Update the value
 		$this -> container = ucfirst($this -> container);
 
@@ -263,6 +281,9 @@ trait StringUtilities
 	 **/
 	public function implode($delimiter, array $object)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Validate the data
 		$delimiter = $this -> validate($delimiter);
 
@@ -285,6 +306,9 @@ trait StringUtilities
 	 **/
 	public function insert($object, int $index)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Validate the data
 		$object = $this -> validate($object);
 
@@ -311,6 +335,9 @@ trait StringUtilities
 	 **/
 	public function kebabCase()
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Defer to the main method
 		return $this -> snakeCase("-");
 	}
@@ -337,11 +364,14 @@ trait StringUtilities
 	 *
 	 * @param int $count.
 	 * @param mixed $ellipsis.
-	 * @return int.
+	 * @return $this.
 	 *
 	 **/
 	public function limit(int $count, $ellipsis = "...")
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Validate the data
 		$ellipsis = $this -> validate($ellipsis);
 
@@ -365,6 +395,9 @@ trait StringUtilities
 	 **/
 	public function lowerCase()
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Update the value
 		$this -> container = mb_strtolower($this -> container, "UTF-8");
 
@@ -383,6 +416,9 @@ trait StringUtilities
 	 **/
 	public function lowerCaseFirstLetter()
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Update the value
 		$this -> container = lcfirst($this -> container);
 
@@ -429,6 +465,9 @@ trait StringUtilities
 	 **/
 	public function prepend($object)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Validate the data
 		$object = $this -> validate($object);
 
@@ -451,6 +490,9 @@ trait StringUtilities
 	 **/
 	public function random(int $length)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Clear the data container
         $this -> container = "";
 
@@ -477,6 +519,9 @@ trait StringUtilities
 	 **/
 	public function replace($find, $replace)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Update the value
         $this -> container = str_replace($find, $replace, $this -> container);
 
@@ -496,6 +541,9 @@ trait StringUtilities
 	 **/
 	public function replaceFirst($find, $replace)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Validate the data
 		$find    = $this -> validate($find);
 		$replace = $this -> validate($replace);
@@ -523,6 +571,9 @@ trait StringUtilities
 	 **/
 	public function replaceLast($find, $replace)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Validate the data
 		$find    = $this -> validate($find);
 		$replace = $this -> validate($replace);
@@ -552,6 +603,9 @@ trait StringUtilities
 	 **/
 	public function replaceUsingExpression($find, $replace, int $limit = -1, int &$count = null)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Update the value
         $this -> container = preg_replace($find, $replace, $this -> container, $limit, $count);
 
@@ -571,6 +625,9 @@ trait StringUtilities
 	 **/
 	public function safeHtml(bool $double_encode = true)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Update the value
 		$this -> container = htmlspecialchars($this -> container, ENT_QUOTES, "UTF-8", $double_encode);
 
@@ -589,6 +646,9 @@ trait StringUtilities
 	 **/
 	public function snakeCase($delimiter = "_")
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Validate the data
 		$delimiter = $this -> validate($delimiter);
 
@@ -613,6 +673,9 @@ trait StringUtilities
 	 **/
 	public function studCase()
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Update the value
         $this -> container = str_replace(
 			" ", "", ucwords(str_replace(["-", "_"], " ", $this -> container))
@@ -634,6 +697,9 @@ trait StringUtilities
 	 **/
 	public function substring(int $start, int $length = null)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Update the value
 		$this -> container = mb_substr($this -> container, $start, $length, "UTF-8");
 
@@ -652,6 +718,9 @@ trait StringUtilities
 	 **/
 	public function titleCase()
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Update the value
 		$this -> container = mb_convert_case($this -> container, MB_CASE_TITLE, "UTF-8");
 
@@ -670,6 +739,9 @@ trait StringUtilities
 	 **/
 	public function trim($object)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Validate the data
 		$object = $this -> validate($object);
 
@@ -691,6 +763,9 @@ trait StringUtilities
 	 **/
 	public function trimLeft($object)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Validate the data
 		$object = $this -> validate($object);
 
@@ -712,6 +787,9 @@ trait StringUtilities
 	 **/
 	public function trimRight($object)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Validate the data
 		$object = $this -> validate($object);
 
@@ -733,6 +811,9 @@ trait StringUtilities
 	 **/
 	public function upperCase()
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Update the value
 		$this -> container = mb_strtoupper($this -> container, "UTF-8");
 

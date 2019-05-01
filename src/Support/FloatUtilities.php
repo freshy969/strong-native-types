@@ -27,6 +27,9 @@ trait FloatUtilities
 	 **/
 	public function add($object)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Validate the data
 		$object = $this -> validate($object);
 
@@ -74,6 +77,9 @@ trait FloatUtilities
 	 **/
 	public function ceiling()
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Set the value
 		$this -> container = ceil($this -> container);
 
@@ -92,6 +98,9 @@ trait FloatUtilities
 	 **/
 	public function divideBy($object)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Validate the data
 		$object = $this -> validate($object);
 
@@ -119,6 +128,9 @@ trait FloatUtilities
 	 **/
 	public function floor()
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Set the value
 		$this -> container = floor($this -> container);
 
@@ -224,6 +236,9 @@ trait FloatUtilities
 	 **/
 	public function multiplyBy($object)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Validate the data
 		$object = $this -> validate($object);
 
@@ -250,6 +265,9 @@ trait FloatUtilities
 	 **/
 	public function remainderFrom($object)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Validate the data
 		$object = $this -> validate($object);
 
@@ -273,6 +291,9 @@ trait FloatUtilities
 	 **/
 	public function random(int $minimum = 0, int $maximum = 10)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Set the value
 		$this -> container = random_int($minimum, $maximum - 1) + (random_int(0, PHP_INT_MAX - 1) / PHP_INT_MAX);
 
@@ -292,6 +313,9 @@ trait FloatUtilities
 	 **/
 	public function round(int $precision = 0, int $mode = PHP_ROUND_HALF_UP)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Set the value
 		$this -> container = round($this -> container, $precision, $mode);
 
@@ -374,6 +398,9 @@ trait FloatUtilities
 	 **/
 	public function subtract($object)
 	{
+		// Ensure the type is not immutable
+		$this -> bailWhenImmutable();
+
 		// Validate the data
 		$object = $this -> validate($object);
 
