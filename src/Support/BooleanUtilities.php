@@ -22,16 +22,13 @@ trait BooleanUtilities
 	 * Set the data container to a negative value.
 	 *
 	 * @param none.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function false()
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
-		// Defer to the main method
-		return $this -> set(false);
+		// Create a new instance and set its value
+		return new static(false);
 	}
 
 
@@ -70,16 +67,13 @@ trait BooleanUtilities
 	 * Set the data container to a positive value.
 	 *
 	 * @param none.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function true()
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
-		// Defer to the main method
-		return $this -> set(true);
+		// Create a new instance and set its value
+		return new static(true);
 	}
 
 }

@@ -22,24 +22,21 @@ trait StringUtilities
 	 * Strip characters before the given search string.
 	 *
 	 * @param mixed $object.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function after($object)
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
 		// Validate the data
 		$object = $this -> validate($object);
 
-		// Update the value
+		// Create a new instance and set its value
 		if ($object !== "") {
-			$this -> container = array_reverse(explode($object, $this -> container, 2))[0];
+			return new static(array_reverse(explode($object, $this -> container, 2))[0]);
 		}
 
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static($this -> container);
 	}
 
 
@@ -48,22 +45,16 @@ trait StringUtilities
 	 * Insert the given string at the end of the data container.
 	 *
 	 * @param mixed $object.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function append($object)
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
 		// Validate the data
 		$object = $this -> validate($object);
 
-		// Update the value
-		$this -> container .= $object;
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static($this -> container . $object);
 	}
 
 
@@ -72,24 +63,21 @@ trait StringUtilities
 	 * Strip characters after the given search string.
 	 *
 	 * @param mixed $object.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function before($object)
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
 		// Validate the data
 		$object = $this -> validate($object);
 
-		// Update the value
+		// Create a new instance and set its value
 		if ($object !== "") {
-			$this -> container = explode($object, $this -> container)[0];
+			return new static(explode($object, $this -> container)[0]);
 		}
 
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static($this -> container);
 	}
 
 
@@ -126,19 +114,13 @@ trait StringUtilities
 	 * Convert the data container to camel case format.
 	 *
 	 * @param none.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function camelCase()
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
-		// Update the value
-		$this -> container = lcfirst($this -> studCase() -> value());
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static(lcfirst($this -> studCase() -> value()));
 	}
 
 
@@ -147,19 +129,13 @@ trait StringUtilities
 	 * Capitalize each word in the data container.
 	 *
 	 * @param none.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function capitalize()
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
-		// Update the value
-		$this -> container = ucwords($this -> container);
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static(ucwords($this -> container));
 	}
 
 
@@ -168,19 +144,13 @@ trait StringUtilities
 	 * Capitalize the first letter in the data container.
 	 *
 	 * @param none.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function capitalizeFirstLetter()
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
-		// Update the value
-		$this -> container = ucfirst($this -> container);
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static(ucfirst($this -> container));
 	}
 
 
@@ -276,22 +246,16 @@ trait StringUtilities
 	 *
 	 * @param mixed $delimiter.
 	 * @param array $object.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function implode($delimiter, array $object)
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
 		// Validate the data
 		$delimiter = $this -> validate($delimiter);
 
-		// Update the data container
-        $this -> container = implode($delimiter, $object);
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static(implode($delimiter, $object));
 	}
 
 
@@ -301,14 +265,11 @@ trait StringUtilities
 	 *
 	 * @param mixed $object.
 	 * @param int $index.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function insert($object, int $index)
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
 		// Validate the data
 		$object = $this -> validate($object);
 
@@ -317,11 +278,8 @@ trait StringUtilities
 			return $this -> append($object);
 		}
 
-		// Update the value
-		$this -> container = substr_replace($this -> container, $object, $index, 0);
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static(substr_replace($this -> container, $object, $index, 0));
 	}
 
 
@@ -330,14 +288,11 @@ trait StringUtilities
 	 * Convert the data container to kebab case format.
 	 *
 	 * @param none.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function kebabCase()
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
 		// Defer to the main method
 		return $this -> snakeCase("-");
 	}
@@ -364,24 +319,21 @@ trait StringUtilities
 	 *
 	 * @param int $count.
 	 * @param mixed $ellipsis.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function limit(int $count, $ellipsis = "...")
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
 		// Validate the data
 		$ellipsis = $this -> validate($ellipsis);
 
-		// Update the value
+		// Create a new instance and set its value
         if (mb_strwidth($this -> container, "UTF-8") > $count) {
-            $this -> container = rtrim(mb_strimwidth($this -> container, 0, $count, "", "UTF-8")) . $ellipsis;
+			return new static(rtrim(mb_strimwidth($this -> container, 0, $count, "", "UTF-8")) . $ellipsis);
         }
 
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static($this -> container);
 	}
 
 
@@ -390,19 +342,13 @@ trait StringUtilities
 	 * Convert the data container to lower case format.
 	 *
 	 * @param none.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function lowerCase()
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
-		// Update the value
-		$this -> container = mb_strtolower($this -> container, "UTF-8");
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static(mb_strtolower($this -> container, "UTF-8"));
 	}
 
 
@@ -411,19 +357,13 @@ trait StringUtilities
 	 * Convert the first letter in the data container to lower case.
 	 *
 	 * @param none.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function lowerCaseFirstLetter()
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
-		// Update the value
-		$this -> container = lcfirst($this -> container);
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static(lcfirst($this -> container));
 	}
 
 
@@ -460,22 +400,16 @@ trait StringUtilities
 	 * Insert the given string at the beginning of the data container.
 	 *
 	 * @param mixed $object.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function prepend($object)
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
 		// Validate the data
 		$object = $this -> validate($object);
 
-		// Update the value
-		$this -> container = $object . $this -> container;
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static($object . $this -> container);
 	}
 
 
@@ -485,26 +419,23 @@ trait StringUtilities
 	 * random string of the given length.
 	 *
 	 * @param int $length.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function random(int $length)
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
-		// Clear the data container
-        $this -> container = "";
+		// Create a temporary variable
+        $container = "";
 
 		// Update the value
-        while (($len = mb_strlen($this -> container, "UTF-8")) < $length) {
-            $this -> container .= substr(str_replace(
+        while (($len = mb_strlen($container, "UTF-8")) < $length) {
+            $container .= substr(str_replace(
 				["/", "+", "="], "", base64_encode(random_bytes($length - $len))
 			), 0, $length - $len);
         }
 
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static($container);
 	}
 
 
@@ -514,19 +445,13 @@ trait StringUtilities
 	 *
 	 * @param mixed $find.
 	 * @param mixed $replace.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function replace($find, $replace)
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
-		// Update the value
-        $this -> container = str_replace($find, $replace, $this -> container);
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static(str_replace($find, $replace, $this -> container));
 	}
 
 
@@ -536,27 +461,24 @@ trait StringUtilities
 	 *
 	 * @param mixed $find.
 	 * @param mixed $replace.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function replaceFirst($find, $replace)
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
 		// Validate the data
 		$find    = $this -> validate($find);
 		$replace = $this -> validate($replace);
 
-		// Update the value
+		// Create a new instance and set its value
         if (strpos($this -> container, $find) !== false) {
-            $this -> container = substr_replace(
+			return new static(substr_replace(
 				$this -> container, $replace, strpos($this -> container, $find), mb_strlen($find, "UTF-8")
-			);
+			));
         }
 
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static($this -> container);
 	}
 
 
@@ -566,27 +488,24 @@ trait StringUtilities
 	 *
 	 * @param mixed $find.
 	 * @param mixed $replace.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function replaceLast($find, $replace)
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
 		// Validate the data
 		$find    = $this -> validate($find);
 		$replace = $this -> validate($replace);
 
-		// Update the value
+		// Create a new instance and set its value
         if (strrpos($this -> container, $find) !== false) {
-            $this -> container = substr_replace(
+			return new static(substr_replace(
 				$this -> container, $replace, strrpos($this -> container, $find), mb_strlen($find, "UTF-8")
-			);
+			));
         }
 
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static($this -> container);
 	}
 
 
@@ -598,19 +517,13 @@ trait StringUtilities
 	 * @param mixed $replace.
 	 * @param int $limit.
 	 * @param int $count.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function replaceUsingExpression($find, $replace, int $limit = -1, int &$count = null)
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
-		// Update the value
-        $this -> container = preg_replace($find, $replace, $this -> container, $limit, $count);
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static(preg_replace($find, $replace, $this -> container, $limit, $count));
 	}
 
 
@@ -620,19 +533,13 @@ trait StringUtilities
 	 * HTML entities, optionally double encoded.
 	 *
 	 * @param bool $double_encode.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function safeHtml(bool $double_encode = true)
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
-		// Update the value
-		$this -> container = htmlspecialchars($this -> container, ENT_QUOTES, "UTF-8", $double_encode);
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static(htmlspecialchars($this -> container, ENT_QUOTES, "UTF-8", $double_encode));
 	}
 
 
@@ -641,25 +548,22 @@ trait StringUtilities
 	 * Convert the data container to snake case format.
 	 *
 	 * @param mixed $delimiter.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function snakeCase($delimiter = "_")
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
 		// Validate the data
 		$delimiter = $this -> validate($delimiter);
 
 		// Remove any extraneous whitespace
-		$this -> container = preg_replace("/\s+/u", "", ucwords($this -> container));
+		$container = preg_replace("/\s+/u", "", ucwords($this -> container));
 
 		// Replace any remaining whitespace with the delimiter
-		$this -> container = preg_replace("/(.)(?=[A-Z])/u", "$1$delimiter", $this -> container);
+		$container = preg_replace("/(.)(?=[A-Z])/u", "$1$delimiter", $container);
 
-		// Convert the data container to lower case
-		return $this -> lowerCase();
+		// Create a new instance and set its value
+		return new static(mb_strtolower($container, "UTF-8"));
 	}
 
 
@@ -668,21 +572,13 @@ trait StringUtilities
 	 * Convert the data container to stud case format.
 	 *
 	 * @param none.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function studCase()
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
-		// Update the value
-        $this -> container = str_replace(
-			" ", "", ucwords(str_replace(["-", "_"], " ", $this -> container))
-		);
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static(str_replace(" ", "", ucwords(str_replace(["-", "_"], " ", $this -> container))));
 	}
 
 
@@ -692,19 +588,13 @@ trait StringUtilities
 	 *
 	 * @param int $start.
 	 * @param int $length.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function substring(int $start, int $length = null)
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
-		// Update the value
-		$this -> container = mb_substr($this -> container, $start, $length, "UTF-8");
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static(mb_substr($this -> container, $start, $length, "UTF-8"));
 	}
 
 
@@ -713,19 +603,13 @@ trait StringUtilities
 	 * Convert the data container to camel case format.
 	 *
 	 * @param none.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function titleCase()
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
-		// Update the value
-		$this -> container = mb_convert_case($this -> container, MB_CASE_TITLE, "UTF-8");
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static(mb_convert_case($this -> container, MB_CASE_TITLE, "UTF-8"));
 	}
 
 
@@ -734,22 +618,16 @@ trait StringUtilities
 	 * Remove the given content from the beginning and end of the data container.
 	 *
 	 * @param mixed $object.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function trim($object)
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
 		// Validate the data
 		$object = $this -> validate($object);
 
-		// Update the value
-		$this -> container = trim($this -> container, $object);
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static(trim($this -> container, $object));
 	}
 
 
@@ -758,22 +636,16 @@ trait StringUtilities
 	 * Remove the given object from the beginning of the data container.
 	 *
 	 * @param mixed $object.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function trimLeft($object)
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
 		// Validate the data
 		$object = $this -> validate($object);
 
-		// Update the value
-		$this -> container = ltrim($this -> container, $object);
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static(ltrim($this -> container, $object));
 	}
 
 
@@ -782,22 +654,16 @@ trait StringUtilities
 	 * Remove the given object from the end of the data container.
 	 *
 	 * @param mixed $object.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function trimRight($object)
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
 		// Validate the data
 		$object = $this -> validate($object);
 
-		// Update the value
-		$this -> container = rtrim($this -> container, $object);
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static(rtrim($this -> container, $object));
 	}
 
 
@@ -806,19 +672,13 @@ trait StringUtilities
 	 * Convert the data container to upper case format.
 	 *
 	 * @param none.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function upperCase()
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
-		// Update the value
-		$this -> container = mb_strtoupper($this -> container, "UTF-8");
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static(mb_strtoupper($this -> container, "UTF-8"));
 	}
 
 }

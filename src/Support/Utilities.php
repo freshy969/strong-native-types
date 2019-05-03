@@ -38,25 +38,4 @@ trait Utilities
 		InvalidAssignmentException::throw($object, $this -> type());
 	}
 
-
-
-	/**
-	 * Set the data container to the given value.
-	 *
-	 * @param mixed $object.
-	 * @return $this.
-	 *
-	 **/
-	public function set($object)
-	{
-		// Validate the data
-		$object = $this -> validate($object);
-
-		// Update the container
-		$this -> container = $object;
-
-		// Allow method chaining
-		return $this;
-	}
-
 }

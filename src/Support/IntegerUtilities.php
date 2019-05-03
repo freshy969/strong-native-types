@@ -22,22 +22,16 @@ trait IntegerUtilities
 	 * Add the given object to the data container.
 	 *
 	 * @param mixed $object.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function add($object)
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
 		// Validate the data
 		$object = $this -> validate($object);
 
-		// Add the value
-		$this -> container += $object;
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static($this -> container + $object);
 	}
 
 
@@ -71,14 +65,11 @@ trait IntegerUtilities
 	 * Divide the given object from the data container.
 	 *
 	 * @param mixed $object.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function divideBy($object)
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
 		// Validate the data
 		$object = $this -> validate($object);
 
@@ -92,11 +83,8 @@ trait IntegerUtilities
 			throw new Exception("Unable to divide by '$object'. The result is not an integer");
 		}
 
-		// Divide the value
-		$this -> container /= $object;
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static($this -> container / $object);
 	}
 
 
@@ -177,7 +165,7 @@ trait IntegerUtilities
 	 * Alias of the remainder function.
 	 *
 	 * @param mixed $object.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function modulusFrom($object)
@@ -192,14 +180,11 @@ trait IntegerUtilities
 	 * Multiply the given object against the data container.
 	 *
 	 * @param mixed $object.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function multiplyBy($object)
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
 		// Validate the data
 		$object = $this -> validate($object);
 
@@ -208,11 +193,8 @@ trait IntegerUtilities
 			throw new Exception("You cannot multiply a value by null");
 		}
 
-		// Multiply the value
-		$this -> container *= $object;
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static($this -> container * $object);
 	}
 
 
@@ -228,14 +210,8 @@ trait IntegerUtilities
 	 **/
 	public function random(int $minimum = 0, int $maximum = 10)
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
-		// Set the value
-		$this -> container = random_int($minimum, $maximum);
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static(random_int($minimum, $maximum));
 	}
 
 
@@ -244,22 +220,16 @@ trait IntegerUtilities
 	 * Divide the given object from the data container and set the remainder.
 	 *
 	 * @param mixed $object.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function remainderFrom($object)
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
 		// Validate the data
 		$object = $this -> validate($object);
 
-		// Set the value to the remainder
-		$this -> container %= $object;
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static($this -> container % $object);
 	}
 
 
@@ -273,17 +243,11 @@ trait IntegerUtilities
 	 **/
 	public function subtract($object)
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
 		// Validate the data
 		$object = $this -> validate($object);
 
-		// Subtract the value
-		$this -> container -= $object;
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static($this -> container - $object);
 	}
 
 }

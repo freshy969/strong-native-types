@@ -6,22 +6,22 @@ namespace Alphametric\Strong\Tests;
 // Using directives
 use Exception;
 use PHPUnit\Framework\TestCase;
-use Alphametric\Strong\Types\BooleanType;
+use Alphametric\Strong\Types\StringType;
 
 // Immutable type test
 class ImmutableTypeTest extends TestCase
 {
 
 	/** @test */
-	public function an_immutable_type_cannot_have_its_underlying_valur_changed()
+	public function an_immutable_type_creates_a_clone_when_modifying_its_value()
 	{
-		// Set the expected exception
-		$this -> expectException(Exception::class);
-		$this -> expectExceptionMessage("An immutable object type cannot have its data changed. If necessary, " .
-										"cast the type to its mutable variety first");
+		// Prepare the variables
+		$x = StringType::from("hello");
+		$y = $x -> append("world");
 
 		// Execute the tests
-		BooleanType::make(true) -> toImmutable() -> false();
+		$this -> assertEquals("hello", $x -> value());
+		$this -> assertEquals("helloworld", $y -> value());
 	}
 
 }

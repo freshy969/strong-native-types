@@ -22,22 +22,16 @@ trait FloatUtilities
 	 * Add the given object to the data container.
 	 *
 	 * @param mixed $object.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function add($object)
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
 		// Validate the data
 		$object = $this -> validate($object);
 
-		// Add the value
-		$this -> container += $object;
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static($this -> container + $object);
 	}
 
 
@@ -72,19 +66,13 @@ trait FloatUtilities
 	 * rounding up the value if necessary.
 	 *
 	 * @param none.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function ceiling()
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
-		// Set the value
-		$this -> container = ceil($this -> container);
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static(ceil($this -> container));
 	}
 
 
@@ -93,14 +81,11 @@ trait FloatUtilities
 	 * Divide the given object from the data container.
 	 *
 	 * @param mixed $object.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function divideBy($object)
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
 		// Validate the data
 		$object = $this -> validate($object);
 
@@ -109,11 +94,8 @@ trait FloatUtilities
 			throw new Exception("You cannot divide by zero or null");
 		}
 
-		// Divide the value
-		$this -> container /= $object;
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static($this -> container / $object);
 	}
 
 
@@ -123,19 +105,13 @@ trait FloatUtilities
 	 * rounding down the value if necessary.
 	 *
 	 * @param none.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function floor()
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
-		// Set the value
-		$this -> container = floor($this -> container);
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static(floor($this -> container));
 	}
 
 
@@ -216,7 +192,7 @@ trait FloatUtilities
 	 * Alias of the remainder function.
 	 *
 	 * @param mixed $object.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function modulusFrom($object)
@@ -231,14 +207,11 @@ trait FloatUtilities
 	 * Multiply the given object against the data container.
 	 *
 	 * @param mixed $object.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function multiplyBy($object)
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
 		// Validate the data
 		$object = $this -> validate($object);
 
@@ -247,35 +220,8 @@ trait FloatUtilities
 			throw new Exception("You cannot multiply a value by null");
 		}
 
-		// Multiply the value
-		$this -> container *= $object;
-
-		// Allow method chaining
-		return $this;
-	}
-
-
-
-	/**
-	 * Divide the given object from the data container and set the remainder.
-	 *
-	 * @param mixed $object.
-	 * @return $this.
-	 *
-	 **/
-	public function remainderFrom($object)
-	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
-		// Validate the data
-		$object = $this -> validate($object);
-
-		// Set the value to the remainder
-		$this -> container = floatval($this -> container % $object);
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static($this -> container * $object);
 	}
 
 
@@ -286,19 +232,31 @@ trait FloatUtilities
 	 *
 	 * @param int $minimum.
 	 * @param int $maximum.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function random(int $minimum = 0, int $maximum = 10)
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
+		// Create a new instance and set its value
+		return new static(random_int($minimum, $maximum - 1) + (random_int(0, PHP_INT_MAX - 1) / PHP_INT_MAX));
+	}
 
-		// Set the value
-		$this -> container = random_int($minimum, $maximum - 1) + (random_int(0, PHP_INT_MAX - 1) / PHP_INT_MAX);
 
-		// Allow method chaining
-		return $this;
+
+	/**
+	 * Divide the given object from the data container and set the remainder.
+	 *
+	 * @param mixed $object.
+	 * @return mixed.
+	 *
+	 **/
+	public function remainderFrom($object)
+	{
+		// Validate the data
+		$object = $this -> validate($object);
+
+		// Create a new instance and set its value
+		return new static(floatval($this -> container % $object));
 	}
 
 
@@ -308,19 +266,13 @@ trait FloatUtilities
 	 *
 	 * @param int $precision.
 	 * @param int $mode.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function round(int $precision = 0, int $mode = PHP_ROUND_HALF_UP)
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
-		// Set the value
-		$this -> container = round($this -> container, $precision, $mode);
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static(round($this -> container, $precision, $mode));
 	}
 
 
@@ -330,7 +282,7 @@ trait FloatUtilities
 	 *
 	 * @param int $precision.
 	 * @param int $mode.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function roundDown(int $precision = 0)
@@ -346,7 +298,7 @@ trait FloatUtilities
 	 *
 	 * @param int $precision.
 	 * @param int $mode.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function roundEven(int $precision = 0)
@@ -362,7 +314,7 @@ trait FloatUtilities
 	 *
 	 * @param int $precision.
 	 * @param int $mode.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function roundOdd(int $precision = 0)
@@ -378,7 +330,7 @@ trait FloatUtilities
 	 *
 	 * @param int $precision.
 	 * @param int $mode.
-	 * @return $this.
+	 * @return mixed.
 	 *
 	 **/
 	public function roundUp(int $precision = 0)
@@ -398,17 +350,11 @@ trait FloatUtilities
 	 **/
 	public function subtract($object)
 	{
-		// Ensure the type is not immutable
-		$this -> bailWhenImmutable();
-
 		// Validate the data
 		$object = $this -> validate($object);
 
-		// Subtract the value
-		$this -> container -= $object;
-
-		// Allow method chaining
-		return $this;
+		// Create a new instance and set its value
+		return new static($this -> container - $object);
 	}
 
 }
